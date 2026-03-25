@@ -26,7 +26,7 @@ Route::get('/dashboard', function () {
             'budget' => (float) ($budgets[$item->category_id]->amount ?? 0),
         ]);
 
-    $monthlyTrends = Expense::selectRaw('strftime("%Y-%m", date) as month, sum(amount) as total')
+    $monthlyTrends = Expense::selectRaw('DATE_FORMAT(date, "%Y-%m") as month, sum(amount) as total')
         ->groupBy('month')
         ->orderBy('month')
         ->get()

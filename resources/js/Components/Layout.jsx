@@ -5,7 +5,8 @@ import {
   WalletOutlined,
   LogoutOutlined,
   MenuFoldOutlined,
-  MenuUnfoldOutlined
+  MenuUnfoldOutlined,
+  HomeOutlined
 } from '@ant-design/icons';
 import { Link, usePage } from '@inertiajs/react';
 
