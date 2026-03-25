@@ -19,16 +19,26 @@ export default function AppLayout({ children, title }) {
   return (
     <Layout className="min-h-screen bg-earth-50">
       <Sider trigger={null} collapsible collapsed={collapsed} theme="light" className="premium-shadow z-10 border-r border-earth-100">
-        <div className="h-16 flex items-center justify-center border-b border-earth-100 bg-earth-100/50">
-          <Title level={4} className="m-0 text-sage-600 truncate px-4 font-bold tracking-tight">
-            {collapsed ? 'SM' : 'SmartExpense'}
-          </Title>
+        <div className="h-16 flex items-center gap-3 px-4 border-b border-earth-100 bg-earth-100/50">
+          <div className="w-8 h-8 bg-sage-600 rounded flex items-center justify-center shadow-md shrink-0">
+            <span className="text-white font-bold text-lg">S</span>
+          </div>
+          {!collapsed && (
+            <span className="text-xl font-bold text-earth-900 truncate tracking-tight">
+              SmartExpense
+            </span>
+          )}
         </div>
         <Menu
           mode="inline"
           selectedKeys={[url]}
           className="border-r-0 mt-4 bg-transparent"
           items={[
+            {
+              key: '/',
+              icon: <HomeOutlined className="text-earth-800" />,
+              label: <Link href="/" className="font-medium text-earth-800">Accueil</Link>,
+            },
             {
               key: '/dashboard',
               icon: <DashboardOutlined className="text-earth-800" />,
