@@ -1,0 +1,56 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Outfit', 'Instrument Sans', ui-sans-serif, system-ui, sans-serif;
+
+    /* Earthy Palette */
+    --color-sage-50: #f4f7f0;
+    --color-sage-100: #e9eee1;
+    --color-sage-200: #d2dec4;
+    --color-sage-500: #8a9a5b;
+    --color-sage-600: #708249;
+    --color-sage-700: #58663a;
+
+    --color-earth-50: #fdfcf7;
+    --color-earth-100: #f9f7ed;
+    --color-earth-200: #f1ebd7;
+    --color-earth-300: #e2d7b6;
+    --color-earth-800: #4a4435;
+    --color-earth-900: #2d2922;
+
+    --color-clay-500: #e2725b;
+    --color-clay-600: #c15b47;
+
+    --color-sand-500: #d2b48c;
+
+    --radius-xl: 1rem;
+    --radius-2xl: 1.5rem;
+}
+
+@layer base {
+    body {
+        @apply bg-earth-50 text-earth-900 antialiased;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        @apply font-bold tracking-tight text-earth-900;
+    }
+}
+
+.premium-card {
+    @apply bg-white/80 backdrop-blur-md border border-earth-200 shadow-sm hover:shadow-md transition-all duration-300 rounded-xl;
+}
+
+.premium-shadow {
+    box-shadow: 0 4px 20px -2px rgba(74, 68, 53, 0.08);
+}
