@@ -12,54 +12,40 @@ Route::get('/', function () {
     return Inertia::render('Welcome');
 });
 
-Route::get('/dashboard', function () {
-    $currentMonth = date('Y-m');
-    $budgets = Budget::where('period', $currentMonth)->get()->keyBy('category_id');
-    
-    $expensesByCategory = Expense::with('category')
-        ->selectRaw('category_id, sum(amount) as total')
-        ->groupBy('category_id')
-        ->get()
-        ->map(fn($item) => [
-            'name' => $item->category->name ?? 'Uncategorized',
-            'value' => (float) $item->total,
-            'budget' => (float) ($budgets[$item->category_id]->amount ?? 0),
-        ]);
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\IncomeController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\BudgetController;
+use App\Http\Controllers\HistoryController;
+use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\SettingController;
 
-    $monthlyTrends = Expense::selectRaw('DATE_FORMAT(date, "%Y-%m") as month, sum(amount) as total')
-        ->groupBy('month')
-        ->orderBy('month')
-        ->get()
-        ->map(fn($item) => [
-            'month' => $item->month,
-            'amount' => (float) $item->total,
-        ]);
-
-    return Inertia::render('Dashboard', [
-        'totalExpenses' => Expense::sum('amount'),
-        'totalIncomes'  => 0, 
-        'recentTransactions' => Expense::with('category')->latest()->take(5)->get(),
-        'expensesByCategory' => $expensesByCategory,
-        'monthlyTrends' => $monthlyTrends,
-        'budgets' => $budgets,
-        'categories' => \App\Models\Category::all(),
-    ]);
+// Home Landing Page
+Route::get('/', function () {
+    return Inertia::render('Welcome');
 });
 
-Route::post('/budgets', function (\Illuminate\Http\Request $request) {
-    $request->validate([
-        'category_id' => 'required|exists:categories,id',
-        'amount' => 'required|numeric|min:0',
-    ]);
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    \App\Models\Budget::updateOrCreate(
-        ['category_id' => $request->category_id, 'period' => date('Y-m')],
-        ['amount' => $request->amount]
-    );
-
-    return back();
-});
-
+// Expenses
 Route::get('/expenses', [ExpenseController::class, 'index']);
 Route::post('/expenses', [ExpenseController::class, 'store']);
 Route::delete('/expenses/{id}', [ExpenseController::class, 'destroy']);
+
+// Incomes
+Route::get('/incomes', [IncomeController::class, 'index']);
+Route::post('/incomes', [IncomeController::class, 'store']);
+Route::delete('/incomes/{id}', [IncomeController::class, 'destroy']);
+
+// Categories
+Route::get('/categories', [CategoryController::class, 'index']);
+Route::post('/categories', [CategoryController::class, 'store']);
+
+// Budgets
+Route::get('/budgets', [BudgetController::class, 'index']);
+Route::post('/budgets', [BudgetController::class, 'store']);
+
+// Other Modules
+Route::get('/history', [HistoryController::class, 'index']);
+Route::get('/notifications', [NotificationController::class, 'index']);
+Route::get('/settings', [SettingController::class, 'index']);

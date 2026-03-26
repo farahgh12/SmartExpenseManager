@@ -6,7 +6,13 @@ import {
   LogoutOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
-  HomeOutlined
+  HomeOutlined,
+  DollarOutlined,
+  TagsOutlined,
+  PieChartOutlined,
+  HistoryOutlined,
+  BellOutlined,
+  SettingOutlined
 } from '@ant-design/icons';
 import { Link, usePage } from '@inertiajs/react';
 
@@ -48,7 +54,37 @@ export default function AppLayout({ children, title }) {
             {
               key: '/expenses',
               icon: <WalletOutlined className="text-earth-800" />,
-              label: <Link href="/expenses" className="font-medium text-earth-800">Expenses</Link>,
+              label: <Link href="/expenses" className="font-medium text-earth-800">Dépenses</Link>,
+            },
+            {
+              key: '/incomes',
+              icon: <DollarOutlined className="text-earth-800" />,
+              label: <Link href="/incomes" className="font-medium text-earth-800">Revenus</Link>,
+            },
+            {
+              key: '/categories',
+              icon: <TagsOutlined className="text-earth-800" />,
+              label: <Link href="/categories" className="font-medium text-earth-800">Catégories</Link>,
+            },
+            {
+              key: '/budgets',
+              icon: <PieChartOutlined className="text-earth-800" />,
+              label: <Link href="/budgets" className="font-medium text-earth-800">Budgets</Link>,
+            },
+            {
+              key: '/history',
+              icon: <HistoryOutlined className="text-earth-800" />,
+              label: <Link href="/history" className="font-medium text-earth-800">Historique</Link>,
+            },
+            {
+              key: '/notifications',
+              icon: <BellOutlined className="text-earth-800" />,
+              label: <Link href="/notifications" className="font-medium text-earth-800">Notifications</Link>,
+            },
+            {
+              key: '/settings',
+              icon: <SettingOutlined className="text-earth-800" />,
+              label: <Link href="/settings" className="font-medium text-earth-800">Paramètres</Link>,
             },
           ]}
         />
