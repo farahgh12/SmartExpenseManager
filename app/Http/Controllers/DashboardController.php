@@ -12,10 +12,17 @@ class DashboardController extends Controller
 {
     public function index()
     {
+        $userId = auth()->id();
         $currentMonth = date('Y-m');
-        $budgets = Budget::where('period', $currentMonth)->get()->keyBy('category_id');
         
-        $expensesByCategory = Expense::with('category')
+        $categories = Category::where('user_id', $userId)->orWhereNull('user_id')->get();
+        $budgets = Budget::where('user_id', $userId)
+            ->where('period', $currentMonth)
+            ->get()
+            ->keyBy('category_id');
+        
+        $expensesByCategory = Expense::where('user_id', $userId)
+            ->with('category')
             ->selectRaw('category_id, sum(amount) as total')
             ->groupBy('category_id')
             ->get()
@@ -25,7 +32,8 @@ class DashboardController extends Controller
                 'budget' => (float) ($budgets[$item->category_id]->amount ?? 0),
             ]);
 
-        $monthlyTrends = Expense::selectRaw('DATE_FORMAT(date, "%Y-%m") as month, sum(amount) as total')
+        $monthlyTrends = Expense::where('user_id', $userId)
+            ->selectRaw('DATE_FORMAT(date, "%Y-%m") as month, sum(amount) as total')
             ->groupBy('month')
             ->orderBy('month')
             ->get()
@@ -34,18 +42,18 @@ class DashboardController extends Controller
                 'amount' => (float) $item->total,
             ]);
 
-        $totalIncomes = Income::sum('amount');
-        $totalExpenses = Expense::sum('amount');
+        $totalIncomes = Income::where('user_id', $userId)->sum('amount');
+        $totalExpenses = Expense::where('user_id', $userId)->sum('amount');
 
         return Inertia::render('Dashboard', [
             'totalExpenses' => $totalExpenses,
             'totalIncomes'  => $totalIncomes,
             'balance'       => $totalIncomes - $totalExpenses,
-            'recentTransactions' => Expense::with('category')->latest()->take(5)->get(),
+            'recentTransactions' => Expense::where('user_id', $userId)->with('category')->latest()->take(5)->get(),
             'expensesByCategory' => $expensesByCategory,
             'monthlyTrends' => $monthlyTrends,
             'budgets' => $budgets,
-            'categories' => Category::all(),
+            'categories' => $categories,
         ]);
     }
 }

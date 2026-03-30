@@ -22,7 +22,7 @@ export default function Dashboard({ totalExpenses, totalIncomes, recentTransacti
       onSuccess: () => {
         setIsBudgetModalOpen(false);
         form.resetFields();
-        message.success('Budget updated successfully!');
+        message.success('Budget mis à jour avec succès !');
       }
     });
   };
@@ -47,7 +47,7 @@ export default function Dashboard({ totalExpenses, totalIncomes, recentTransacti
       ),
     },
     {
-      title: 'Amount',
+      title: 'Montant',
       dataIndex: 'amount',
       key: 'amount',
       render: (amount) => (
@@ -61,12 +61,12 @@ export default function Dashboard({ totalExpenses, totalIncomes, recentTransacti
       <Head title="Dashboard" />
 
       <div className="mb-8">
-        <h2 className="text-2xl font-bold text-earth-900 mb-6">Financial Overview</h2>
+        <h2 className="text-2xl font-bold text-earth-900 mb-6">Aperçu Financier</h2>
         <Row gutter={16}>
           <Col span={8}>
             <Card className="premium-card">
               <Statistic
-                title={<span className="text-earth-800/60 font-medium">Total Income</span>}
+                title={<span className="text-earth-800/60 font-medium">Revenu Total</span>}
                 value={totalIncomes || 0}
                 precision={2}
                 valueStyle={{ color: '#8A9A5B' }}
@@ -78,7 +78,7 @@ export default function Dashboard({ totalExpenses, totalIncomes, recentTransacti
           <Col span={8}>
             <Card className="premium-card">
               <Statistic
-                title={<span className="text-earth-800/60 font-medium">Total Expenses</span>}
+                title={<span className="text-earth-800/60 font-medium">Dépenses Totales</span>}
                 value={totalExpenses || 0}
                 precision={2}
                 valueStyle={{ color: '#E2725B' }}
@@ -90,7 +90,7 @@ export default function Dashboard({ totalExpenses, totalIncomes, recentTransacti
           <Col span={8}>
             <Card className="premium-card bg-sage-50/50">
               <Statistic
-                title={<span className="text-sage-700 font-semibold">Balance</span>}
+                title={<span className="text-sage-700 font-semibold">Solde</span>}
                 value={(totalIncomes || 0) - (totalExpenses || 0)}
                 precision={2}
                 valueStyle={{ color: '#58663a', fontWeight: 'bold' }}
@@ -104,7 +104,7 @@ export default function Dashboard({ totalExpenses, totalIncomes, recentTransacti
       <div className="mb-8">
         <Row gutter={16}>
           <Col span={12}>
-            <Card title={<span className="text-earth-900 font-bold">Expenses by Category</span>} className="premium-card">
+            <Card title={<span className="text-earth-900 font-bold">Dépenses par Catégorie</span>} className="premium-card">
               <div style={{ width: '100%', height: 300 }}>
                 <ResponsiveContainer>
                   <PieChart>
@@ -129,7 +129,7 @@ export default function Dashboard({ totalExpenses, totalIncomes, recentTransacti
             </Card>
           </Col>
           <Col span={12}>
-            <Card title={<span className="text-earth-900 font-bold">Monthly Trend</span>} className="premium-card">
+            <Card title={<span className="text-earth-900 font-bold">Tendance Mensuelle</span>} className="premium-card">
               <div style={{ width: '100%', height: 300 }}>
                 <ResponsiveContainer>
                   <LineChart data={monthlyTrends || []}>
@@ -148,13 +148,13 @@ export default function Dashboard({ totalExpenses, totalIncomes, recentTransacti
 
       <div className="mb-8">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-xl font-bold text-earth-900">Budget Progress</h2>
+          <h2 className="text-xl font-bold text-earth-900">Progression du Budget</h2>
           <Button 
             icon={<SettingOutlined />} 
             onClick={() => setIsBudgetModalOpen(true)}
             className="border-sage-500 text-sage-600 hover:text-sage-700"
           >
-            Manage Budgets
+            Gérer les Budgets
           </Button>
         </div>
         <Row gutter={[16, 16]}>
@@ -178,7 +178,7 @@ export default function Dashboard({ totalExpenses, totalIncomes, recentTransacti
                     trailColor="#f1ebd7"
                   />
                   {percent >= 100 && (
-                    <div className="text-clay-600 text-xs mt-1 font-bold">⚠️ Budget Exceeded!</div>
+                    <div className="text-clay-600 text-xs mt-1 font-bold">⚠️ Budget Dépassé !</div>
                   )}
                 </Card>
               </Col>
@@ -187,7 +187,7 @@ export default function Dashboard({ totalExpenses, totalIncomes, recentTransacti
           {(expensesByCategory || []).filter(c => c.budget > 0).length === 0 && (
             <Col span={24}>
               <div className="p-8 text-center bg-earth-100/30 rounded-xl border border-dashed border-earth-200 text-earth-800/40">
-                No budgets set for this month. Click "Manage Budgets" to start tracking.
+                Aucun budget défini pour ce mois. Cliquez sur "Gérer les Budgets" pour commencer.
               </div>
             </Col>
           )}
@@ -196,9 +196,9 @@ export default function Dashboard({ totalExpenses, totalIncomes, recentTransacti
 
       <div>
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-bold text-earth-900">Recent Transactions</h2>
+          <h2 className="text-xl font-bold text-earth-900">Transactions Récentes</h2>
           <Link href="/expenses" className="text-sage-600 hover:text-sage-700 font-semibold flex items-center gap-1">
-            View All <span className="text-lg">→</span>
+            Voir Tout <span className="text-lg">→</span>
           </Link>
         </div>
         <Table 
@@ -210,24 +210,24 @@ export default function Dashboard({ totalExpenses, totalIncomes, recentTransacti
         />
       </div>
       <Modal 
-        title={<span className="text-earth-900 font-bold">Set Category Budget</span>}
+        title={<span className="text-earth-900 font-bold">Définir le Budget</span>}
         open={isBudgetModalOpen}
         onCancel={() => setIsBudgetModalOpen(false)}
         footer={null}
       >
         <Form form={form} layout="vertical" onFinish={handleSetBudget}>
           <Form.Item name="category_id" label="Category" rules={[{ required: true }]}>
-            <Select placeholder="Select category" size="large">
+            <Select placeholder="Sélectionner une catégorie" size="large">
               {(categories || []).map(c => (
                 <Select.Option key={c.id} value={c.id}>{c.name}</Select.Option>
               ))}
             </Select>
           </Form.Item>
-          <Form.Item name="amount" label="Monthly Budget Amount ($)" rules={[{ required: true }]}>
+          <Form.Item name="amount" label="Montant du Budget Mensuel ($)" rules={[{ required: true }]}>
             <InputNumber className="w-full" size="large" min={1} />
           </Form.Item>
           <Button type="primary" htmlType="submit" className="w-full bg-sage-600 border-none h-12 text-base font-bold">
-            Save Budget
+            Enregistrer le Budget
           </Button>
         </Form>
       </Modal>

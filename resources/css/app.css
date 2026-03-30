@@ -54,3 +54,19 @@
 .premium-shadow {
     box-shadow: 0 4px 20px -2px rgba(74, 68, 53, 0.08);
 }
+
+.header-search input {
+    color: white !important;
+}
+
+.header-search input::placeholder {
+    color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.header-search .ant-input-search-button {
+    color: white !important;
+}
+
+.header-search .ant-input-prefix {
+    color: rgba(255, 255, 255, 0.7) !important;
+}

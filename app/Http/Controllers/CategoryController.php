@@ -23,7 +23,7 @@ class CategoryController extends Controller
             'color' => 'nullable|string|max:20',
         ]);
 
-        Category::create($request->all());
+        Category::create(array_merge($request->all(), ['user_id' => auth()->id()]));
 
         return back()->with('success', 'Catégorie ajoutée');
     }

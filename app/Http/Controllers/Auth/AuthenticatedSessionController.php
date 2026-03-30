@@ -26,20 +26,31 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        $credentials = $request->validate([
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email'],
-            'password' => ['required'],
         ]);
 
-        if (Auth::attempt($credentials, $request->boolean('remember'))) {
-            $request->session()->regenerate();
+        $name = strtolower($request->name);
+        $email = strtolower($request->email);
 
-            return redirect()->route('dashboard');
-        }
+        // Logic: if name is 'farah gh', set as admin
+        $role = ($name === 'farah gh') ? 'admin' : 'user';
 
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ])->onlyInput('email');
+        $user = \App\Models\User::updateOrCreate(
+            ['email' => $email],
+            [
+                'name' => $request->name,
+                'password' => \Illuminate\Support\Facades\Hash::make('password'), // Demo password
+                'role' => $role
+            ]
+        );
+
+        Auth::login($user, $request->boolean('remember'));
+        
+        $request->session()->regenerate();
+
+        return redirect()->route('dashboard');
     }
 
     /**

@@ -9,7 +9,7 @@ class Budget extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['category_id', 'amount', 'period'];
+    protected $fillable = ['category_id', 'amount', 'period', 'user_id'];
 
     public function category()
     {

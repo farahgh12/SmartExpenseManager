@@ -12,33 +12,39 @@ export default function Expenses({ expenses, categories }) {
   const { post, processing } = useForm();
 
   const handleAddExpense = (values) => {
-    // Format date before sending
+    // Selection is an array because of mode="tags"
+    const selection = values.category_selection?.[0];
+    const isNew = isNaN(selection);
+    
     const payload = {
-      ...values,
+      description: values.description,
+      amount: values.amount,
       date: values.date.format('YYYY-MM-DD'),
+      category_id: !isNew ? selection : null,
+      category_name: isNew ? selection : null,
     };
     
     router.post('/expenses', payload, {
       onSuccess: () => {
         setIsModalOpen(false);
         form.resetFields();
-        notification.success({ message: 'Expense added successfully!' });
+        notification.success({ message: 'Dépense ajoutée avec succès !' });
       },
       onError: () => {
-        notification.error({ message: 'Failed to add expense. Please check your inputs.' });
+        notification.error({ message: 'Erreur lors de l\'ajout de la dépense.' });
       }
     });
   };
 
   const handleDelete = (id) => {
     Modal.confirm({
-      title: 'Are you sure you want to delete this expense?',
-      okText: 'Yes',
+      title: 'Voulez-vous vraiment supprimer cette dépense ?',
+      okText: 'Oui',
       okType: 'danger',
-      cancelText: 'No',
+      cancelText: 'Non',
       onOk: () => {
         router.delete(`/expenses/${id}`, {
-          onSuccess: () => notification.success({ message: 'Expense deleted successfully!' })
+          onSuccess: () => notification.success({ message: 'Dépense supprimée avec succès !' })
         });
       }
     });
@@ -58,17 +64,17 @@ export default function Expenses({ expenses, categories }) {
       key: 'description',
     },
     {
-      title: 'Category',
+      title: 'Catégorie',
       dataIndex: 'category',
       key: 'category',
       render: (category) => (
-        <Tag color="orange" className="border-earth-200 text-earth-800 bg-earth-100">{category?.name || 'Uncategorized'}</Tag>
+        <Tag color="orange" className="border-earth-200 text-earth-800 bg-earth-100">{category?.name || 'Non catégorisé'}</Tag>
       ),
       filters: categories.map(c => ({ text: c.name, value: c.id })),
       onFilter: (value, record) => record.category_id === value,
     },
     {
-      title: 'Amount',
+      title: 'Montant',
       dataIndex: 'amount',
       key: 'amount',
       render: (amount) => (
@@ -93,11 +99,11 @@ export default function Expenses({ expenses, categories }) {
   ];
 
   return (
-    <AppLayout title="Manage Expenses">
-      <Head title="Expenses" />
+    <AppLayout title="Gérer les Dépenses">
+      <Head title="Dépenses" />
       
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-bold text-earth-900">Your Expenses</h2>
+        <h2 className="text-2xl font-bold text-earth-900">Vos Dépenses</h2>
         <Button 
           type="primary" 
           icon={<PlusOutlined />} 
@@ -105,7 +111,7 @@ export default function Expenses({ expenses, categories }) {
           className="bg-sage-600 shadow-md hover:bg-sage-500 border-none"
           size="large"
         >
-          Add Expense
+          Ajouter une Dépense
         </Button>
       </div>
 
@@ -118,7 +124,7 @@ export default function Expenses({ expenses, categories }) {
       />
 
       <Modal 
-        title={<span className="text-lg font-bold text-earth-900">Add New Expense</span>}
+        title={<span className="text-lg font-bold text-earth-900">Ajouter une Nouvelle Dépense</span>}
         open={isModalOpen} 
         onCancel={() => setIsModalOpen(false)}
         footer={null}
@@ -132,16 +138,16 @@ export default function Expenses({ expenses, categories }) {
           <Form.Item 
             name="description" 
             label="Description" 
-            rules={[{ required: true, message: 'Please enter a description!' }]}
+            rules={[{ required: true, message: 'Veuillez entrer une description !' }]}
           >
-            <Input size="large" placeholder="E.g., Groceries from Walmart" />
+            <Input size="large" placeholder="Ex: Courses au supermarché" />
           </Form.Item>
           
           <div className="flex gap-4">
             <Form.Item 
               name="amount" 
-              label="Amount ($)" 
-              rules={[{ required: true, message: 'Please enter the amount!' }]}
+              label="Montant ($)" 
+              rules={[{ required: true, message: 'Veuillez entrer le montant !' }]}
               className="flex-1"
             >
               <InputNumber size="large" className="w-full" min={0.01} step={0.01} placeholder="0.00" />
@@ -150,7 +156,7 @@ export default function Expenses({ expenses, categories }) {
             <Form.Item 
               name="date" 
               label="Date" 
-              rules={[{ required: true, message: 'Please select a date!' }]}
+              rules={[{ required: true, message: 'Veuillez sélectionner une date !' }]}
               className="flex-1"
             >
               <DatePicker size="large" className="w-full" />
@@ -158,14 +164,23 @@ export default function Expenses({ expenses, categories }) {
           </div>
 
           <Form.Item 
-            name="category_id" 
-            label="Category" 
-            rules={[{ required: true, message: 'Please select a category!' }]}
+            name="category_selection" 
+            label="Catégorie" 
+            rules={[{ required: true, message: 'Veuillez sélectionner ou taper une catégorie !' }]}
           >
-            <Select size="large" placeholder="Select a category">
+            <Select 
+              size="large" 
+              showSearch
+              mode="tags"
+              maxCount={1}
+              placeholder="Sélectionner ou taper une nouvelle catégorie"
+              optionFilterProp="label"
+            >
               {categories.map(c => (
-                <Select.Option key={c.id} value={c.id}>{c.name}</Select.Option>
+                <Select.Option key={c.id} value={c.id} label={c.name}>{c.name}</Select.Option>
               ))}
+              {/* This mode allows selecting existing or searching. 
+                  To support typing new ones, we can use dropdownRender or just mode="tags" with maxCount=1 */}
             </Select>
           </Form.Item>
 
@@ -175,7 +190,7 @@ export default function Expenses({ expenses, categories }) {
             className="w-full bg-sage-600 hover:bg-sage-700 h-12 text-base shadow-md border-none font-bold mt-2"
             loading={processing}
           >
-            Save Expense
+            Enregistrer la Dépense
           </Button>
         </Form>
       </Modal>

@@ -19,19 +19,30 @@ class IncomeController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'amount' => 'required|numeric|min:0',
             'source' => 'required|string|max:255',
             'date' => 'required|date',
             'category_id' => 'nullable|exists:categories,id',
+            'category_name' => 'nullable|string|max:255',
         ]);
 
+        $categoryId = $validated['category_id'];
+
+        if (!$categoryId && !empty($validated['category_name'])) {
+            $category = Category::firstOrCreate(
+                ['name' => $validated['category_name']],
+                ['user_id' => auth()->id()]
+            );
+            $categoryId = $category->id;
+        }
+
         Income::create([
-            'amount' => $request->amount,
-            'source' => $request->source,
-            'date' => $request->date,
-            'user_id' => 1, 
-            'category_id' => $request->category_id,
+            'amount' => $validated['amount'],
+            'source' => $validated['source'],
+            'date' => $validated['date'],
+            'user_id' => auth()->id(),
+            'category_id' => $categoryId,
         ]);
 
         return back()->with('success', 'Revenu ajouté avec succès');

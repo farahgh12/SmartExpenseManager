@@ -5,8 +5,9 @@ import { MailOutlined, LockOutlined, LoginOutlined } from '@ant-design/icons';
 
 export default function Login({ status }) {
     const { data, setData, post, processing, errors, reset } = useForm({
+        name: '',
         email: '',
-        password: '',
+        password: 'password', // Default password for auto-login
         remember: false,
     });
 
@@ -19,20 +20,24 @@ export default function Login({ status }) {
 
     return (
         <div className="min-h-screen relative flex items-center justify-center overflow-hidden font-sans">
-            <Head title="Login - SmartExpense" />
+            <Head title="Connexion - SmartExpense" />
 
-            {/* Background Image with Overlay */}
+            {/* Background Image - Adjusted filters to see the image better */}
             <div 
-                className="absolute inset-0 z-0 bg-cover bg-center transition-all duration-700"
+                className="absolute inset-0 z-0 bg-cover bg-center transition-all duration-1000"
                 style={{ 
-                    backgroundImage: 'url("https://images.unsplash.com/photo-1579621970795-87faff2f9050?q=80&w=2070&auto=format&fit=crop")',
-                    filter: 'brightness(0.5) contrast(1.1)' 
+                    backgroundImage: 'url("/images/bg.jpg")', // Assurez-vous que l'image est bien là
+                    filter: 'brightness(0.4) blur(3px) contrast(1.1)',
+                    transform: 'scale(1.02)'
                 }}
             />
             
-            {/* Ambient Blobs for extra premium feel */}
-            <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-sage-500/20 rounded-full blur-[120px] z-0 animate-pulse"></div>
-            <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-clay-500/10 rounded-full blur-[120px] z-0"></div>
+            {/* Subtle overlay */}
+            <div className="absolute inset-0 z-0 bg-earth-900/40 transition-all duration-700"></div>
+            
+            {/* Ambient Blobs */}
+            <div className="absolute top-[-5%] left-[-5%] w-[40%] h-[40%] bg-sage-500/10 rounded-full blur-[100px] z-0 animate-pulse"></div>
+            <div className="absolute bottom-[-5%] right-[-5%] w-[40%] h-[40%] bg-clay-500/5 rounded-full blur-[100px] z-0"></div>
 
             <div className="relative z-10 w-full max-w-md px-4">
                 {/* Logo Section */}
@@ -55,6 +60,21 @@ export default function Login({ status }) {
                     )}
 
                     <form onSubmit={onFinish} className="space-y-8">
+                        <div>
+                            <label className="block text-sand-500 font-bold uppercase text-[10px] tracking-[0.3em] mb-3 ml-1">
+                                Nom Complet
+                            </label>
+                            <Input 
+                                size="large"
+                                prefix={<LoginOutlined className="text-sage-600/60" />} 
+                                placeholder="Votre Nom" 
+                                value={data.name}
+                                onChange={e => setData('name', e.target.value)}
+                                className="earth-input"
+                            />
+                            {errors.name && <div className="text-clay-500 text-[11px] mt-2 ml-1 font-bold italic">{errors.name}</div>}
+                        </div>
+
                         <div>
                             <label className="block text-sand-500 font-bold uppercase text-[10px] tracking-[0.3em] mb-3 ml-1">
                                 Identifiant / Email
@@ -105,7 +125,7 @@ export default function Login({ status }) {
                             disabled={processing}
                             className="bg-sage-600 hover:bg-sage-500! border-none h-16 rounded-2xl font-bold text-base shadow-2xl uppercase tracking-[0.3em] transition-all hover:scale-[1.02] active:scale-[0.98]"
                         >
-                            Log In
+                            Se Connecter
                         </Button>
                     </form>
                 </div>

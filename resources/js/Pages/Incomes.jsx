@@ -12,9 +12,15 @@ export default function Incomes({ incomes, categories }) {
   const { post, processing } = useForm();
 
   const handleAddIncome = (values) => {
+    const selection = values.category_selection?.[0];
+    const isNew = isNaN(selection);
+
     const payload = {
-      ...values,
+      source: values.source,
+      amount: values.amount,
       date: values.date.format('YYYY-MM-DD'),
+      category_id: !isNew ? selection : null,
+      category_name: isNew ? selection : null,
     };
     
     router.post('/incomes', payload, {
@@ -155,12 +161,19 @@ export default function Incomes({ incomes, categories }) {
           </div>
 
           <Form.Item 
-            name="category_id" 
+            name="category_selection" 
             label="Catégorie (Optionnel)"
           >
-            <Select size="large" placeholder="Choisir une catégorie">
+            <Select 
+              size="large" 
+              showSearch 
+              mode="tags"
+              maxCount={1}
+              placeholder="Choisir ou taper une catégorie"
+              optionFilterProp="label"
+            >
               {categories.map(c => (
-                <Select.Option key={c.id} value={c.id}>{c.name}</Select.Option>
+                <Select.Option key={c.id} value={c.id} label={c.name}>{c.name}</Select.Option>
               ))}
             </Select>
           </Form.Item>

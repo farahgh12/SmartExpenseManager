@@ -25,16 +25,56 @@ class ExpenseController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'amount' => 'required|numeric',
             'description' => 'required|string',
             'date' => 'required|date',
-            'category_id' => 'required|exists:categories,id',
+            'category_id' => 'nullable|exists:categories,id',
+            'category_name' => 'nullable|string|max:255',
         ]);
 
-        Expense::create($request->all());
+        $categoryId = $validated['category_id'];
+
+        // If no category_id but a category_name is provided, create/find the category
+        if (!$categoryId && !empty($validated['category_name'])) {
+            $category = Category::firstOrCreate(
+                ['name' => $validated['category_name']],
+                ['user_id' => auth()->id()]
+            );
+            $categoryId = $category->id;
+        }
+
+        $expense = Expense::create([
+            'amount' => $validated['amount'],
+            'description' => $validated['description'],
+            'date' => $validated['date'],
+            'category_id' => $categoryId,
+            'user_id' => auth()->id(),
+        ]);
+
+        // Check budget and notify if exceeded
+        if ($categoryId) {
+            $month = now()->format('Y-m');
+            $budget = \App\Models\Budget::where('user_id', auth()->id())
+                ->where('category_id', $categoryId)
+                ->where('period', $month)
+                ->first();
+
+            if ($budget) {
+                $totalSpent = Expense::where('user_id', auth()->id())
+                    ->where('category_id', $categoryId)
+                    ->whereYear('date', now()->year)
+                    ->whereMonth('date', now()->month)
+                    ->sum('amount');
+
+                if ($totalSpent > $budget->amount) {
+                    $category = \App\Models\Category::find($categoryId);
+                    auth()->user()->notify(new \App\Notifications\BudgetExceeded($category, $totalSpent, $budget->amount));
+                }
+            }
+        }
         
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Dépense ajoutée');
     }
 
     public function destroy($id)

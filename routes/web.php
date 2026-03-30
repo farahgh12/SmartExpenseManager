@@ -14,6 +14,8 @@ use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\AdminController;
 
 // Authentication Routes
 Route::get('/', [AuthenticatedSessionController::class, 'create'])->name('login');
@@ -47,9 +49,21 @@ Route::middleware('auth')->group(function () {
     // Budgets
     Route::get('/budgets', [BudgetController::class, 'index']);
     Route::post('/budgets', [BudgetController::class, 'store']);
+    Route::delete('/budgets/{id}', [BudgetController::class, 'destroy']);
 
     // Other Modules
     Route::get('/history', [HistoryController::class, 'index']);
     Route::get('/notifications', [NotificationController::class, 'index']);
+    Route::post('/notifications/read-all', [NotificationController::class, 'markAllAsRead']);
     Route::get('/settings', [SettingController::class, 'index']);
+    Route::post('/settings/profile', [SettingController::class, 'updateProfile']);
+    Route::post('/settings/password', [SettingController::class, 'updatePassword']);
+    Route::get('/reports', [ReportController::class, 'index']);
+
+    // Admin Routes
+    Route::middleware(['admin'])->prefix('admin')->group(function () {
+        Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+        Route::patch('/users/{user}/role', [AdminController::class, 'updateRole']);
+        Route::delete('/users/{user}', [AdminController::class, 'destroy']);
+    });
 });
