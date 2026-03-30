@@ -96,7 +96,7 @@ Vue d'ensemble en temps réel :
 
 | Rôle | Nom à saisir | Email | Code PIN Admin |
 |------|-------------|-------|---------------|
-| **Administrateur** | `farah gh` | n'importe lequel | `1234` |
+| **Administrateur** | `farah ghilan` | n'importe lequel | `1234` |
 | **Utilisateur** | n'importe lequel | n'importe lequel | — |
 
 ---
@@ -217,7 +217,7 @@ routes/
 
 ## 👤 Auteur
 
-**Farah Ghirissi**  
+**Farah Ghilan**  
 Institut Spécialisé en Nouvelles Technologies de l'Information et de la Communication — SAFI  
 OFPPT | Année 2025–2026
 
