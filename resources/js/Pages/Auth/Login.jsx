@@ -90,20 +90,7 @@ export default function Login({ status }) {
                             {errors.email && <div className="text-clay-500 text-[11px] mt-2 ml-1 font-bold italic">{errors.email}</div>}
                         </div>
 
-                        <div>
-                            <label className="block text-sand-500 font-bold uppercase text-[10px] tracking-[0.3em] mb-3 ml-1">
-                                Mot de Passe
-                            </label>
-                            <Input.Password 
-                                size="large"
-                                prefix={<LockOutlined className="text-sage-600/60" />} 
-                                placeholder="••••••••" 
-                                value={data.password}
-                                onChange={e => setData('password', e.target.value)}
-                                className="earth-input"
-                            />
-                            {errors.password && <div className="text-clay-500 text-[11px] mt-2 ml-1 font-bold italic">{errors.password}</div>}
-                        </div>
+
 
                         <div className="flex items-center justify-between text-xs font-bold text-sand-500/60 transition-all">
                             <Checkbox 
@@ -117,6 +104,8 @@ export default function Login({ status }) {
                                 Perdu ?
                             </a>
                         </div>
+
+
 
                         <Button 
                             type="primary" 
