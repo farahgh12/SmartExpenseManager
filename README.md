@@ -1,59 +1,226 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# SmartExpenseManager 💰
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+> Une application web professionnelle et sécurisée de gestion financière personnelle, développée avec **Laravel 12** et **React 19** (Inertia.js).
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🎨 Design Premium — Thème "Earthy"
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+L'interface intègre un design **Premium Earthy** avec une palette de couleurs harmonieuse (vert sauge, brun terre, sable) et des micro-animations pour une expérience utilisateur moderne et élégante.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## 🔐 Authentification & Accès par Rôle
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+L'accès à la plateforme est **universel et intelligent** — aucune inscription manuelle requise.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+| Rôle | Accès |
+|------|-------|
+| **Admin** | Se connecter avec le nom `farah gh` → Accès complet à la plateforme |
+| **Utilisateur** | N'importe quel nom → Espace personnel (dépenses, revenus, budgets) |
 
-## Laravel Sponsors
+> Le système crée automatiquement le compte si l'email n'existe pas encore.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+---
 
-### Premium Partners
+## 📊 Espace Utilisateur
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### Tableau de Bord — Vue Financière Globale
+Vue d'ensemble en temps réel : **Revenu Total**, **Dépenses Totales** et **Solde Net** avec graphiques interactifs (Recharts).  
+- Graphique circulaire des **dépenses par catégorie**
+- Graphique de **tendance mensuelle** des revenus et dépenses
+- Liste des **transactions récentes**
 
-## Contributing
+### Module Dépenses
+Ajout de dépenses avec montant, description, date et catégorie. Le système vérifie automatiquement si le budget est dépassé et envoie une **notification d'alerte** en temps réel.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Module Revenus
+Enregistrement de toutes les sources de revenus (salaire, bonus, freelance...) avec consultation de l'historique complet.
 
-## Code of Conduct
+### Module Catégories
+Création de catégories personnalisées avec **code couleur** pour organiser vos finances selon vos habitudes.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Module Budgets
+Définition d'un budget mensuel par catégorie avec **barre de progression visuelle**. Une alerte est déclenchée automatiquement dès que le budget est dépassé.
 
-## Security Vulnerabilities
+| Vue Budgets | Alerte Dépassement |
+|-------------|-------------------|
+| Barre de progression par catégorie | Notification automatique en temps réel |
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Module Historique & Exports
+Consultation de l'ensemble des transactions avec possibilité d'export :
 
-## License
+| Format | Description |
+|--------|-------------|
+| 📥 **CSV (Excel)** | Export complet pour traitement externe |
+| 🖨️ **PDF** | Rapport imprimable stylisé directement depuis le navigateur |
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Module Rapports & Financial Coach
+Analyse financière avancée mois par mois :
+- Comparaison **dépenses actuelles vs mois précédent**
+- Calcul du **taux d'épargne**
+- **Financial Coach** : conseils personnalisés générés automatiquement selon les habitudes de dépense
+
+### Module Notifications
+- Alertes automatiques de **dépassement de budget**
+- Badge dynamique indiquant les **notifications non lues**
+- Marquage en masse comme "lues"
+
+### Module Paramètres
+- Modification du **nom et email** du profil
+- **Changement de mot de passe** sécurisé avec vérification de l'ancien mot de passe
+
+---
+
+## 🛡️ Espace Administrateur (Admin uniquement)
+
+L'administrateur dispose d'un **panneau sécurisé à double authentification** (session + code PIN).
+
+### Accès Sécurisé par PIN
+Même un administrateur connecté doit saisir le **code PIN secret** pour accéder au panneau de contrôle — ajoutant une couche de sécurité supplémentaire.
+
+### Statistiques Globales de la Plateforme
+Vue d'ensemble en temps réel :
+- Nombre total d'**utilisateurs actifs**
+- Volume global des **dépenses** de la plateforme
+- Volume global des **revenus** de la plateforme
+
+### Gestion des Comptes Utilisateurs
+- Consultation de tous les comptes inscrits
+- **Modification des rôles** (User ↔ Admin) en un clic
+- **Suppression** de comptes (avec protection contre l'auto-suppression)
+
+---
+
+## 🔑 Identifiants de Démonstration
+
+| Rôle | Nom à saisir | Email | Code PIN Admin |
+|------|-------------|-------|---------------|
+| **Administrateur** | `farah gh` | n'importe lequel | `1234` |
+| **Utilisateur** | n'importe lequel | n'importe lequel | — |
+
+---
+
+## ⚙️ Fonctionnalités Clés
+
+### 💰 Gestion Financière
+- Suivi complet revenus & dépenses avec catégorisation
+- Budgets mensuels avec alertes automatiques
+- Historique filtrable avec export multi-format
+
+### 📈 Analyse & Intelligence
+- Rapports mensuels comparatifs (mois actuel vs précédent)
+- Financial Coach avec conseils personnalisés
+- Graphiques interactifs et tableaux de bord dynamiques
+
+### 🛡️ Sécurité & Administration
+- Authentification universelle avec attribution automatique des rôles
+- RBAC (Role-Based Access Control) via Middlewares Laravel
+- Double authentification pour le panneau Admin (Session + PIN)
+- Protection CSRF sur tous les formulaires
+- Mots de passe hachés (Bcrypt)
+
+### 📤 Mobilité des Données
+- Export CSV compatible Excel
+- Impression PDF stylisée directement depuis le navigateur
+
+---
+
+## 🛠️ Stack Technologique
+
+| Composant | Technologie |
+|-----------|-------------|
+| **Backend** | Laravel 12 / PHP 8.2 |
+| **Frontend** | React 19 + Inertia.js |
+| **Base de données** | MySQL |
+| **UI Composants** | Ant Design 6 |
+| **Graphiques** | Recharts |
+| **Styling** | TailwindCSS 4 + CSS personnalisé |
+| **Build Tool** | Vite 7 |
+| **Versioning** | Git / GitHub |
+
+---
+
+## 🏗️ Architecture
+
+- **MVC** (Model-View-Controller) côté Backend Laravel
+- **SPA** (Single Page Application) côté Frontend React/Inertia
+- **RBAC** pour la gestion des permissions et des rôles
+
+---
+
+## 🚀 Installation
+
+### Prérequis
+- PHP 8.2+
+- Composer
+- Node.js 18+
+- MySQL
+
+### Étapes
+
+```bash
+# 1. Cloner le dépôt
+git clone https://github.com/farahgh12/SmartExpenseManager.git
+cd SmartExpenseManager
+
+# 2. Installer les dépendances PHP
+composer install
+
+# 3. Installer les dépendances JavaScript
+npm install
+
+# 4. Configuration de l'environnement
+cp .env.example .env
+# Modifier .env : DB_DATABASE, DB_USERNAME, DB_PASSWORD
+
+# 5. Générer la clé d'application
+php artisan key:generate
+
+# 6. Créer les tables
+php artisan migrate
+
+# 7. Peupler avec des données de démonstration
+php artisan db:seed --class=DemoDataSeeder
+php artisan seed:notifications
+
+# 8. Lancer l'application (2 terminaux)
+php artisan serve
+npm run dev
+```
+
+### Accès
+- Application : `http://localhost:8000`
+- Se connecter avec le nom **`farah gh`** + n'importe quel email pour accéder en tant qu'Admin
+
+---
+
+## 📁 Structure du Projet
+
+```
+app/
+├── Http/Controllers/        # Logique métier (Expenses, Incomes, Reports, Admin...)
+├── Http/Middleware/          # AdminMiddleware (RBAC)
+├── Models/                   # User, Expense, Income, Category, Budget
+├── Notifications/            # BudgetExceeded (alertes automatiques)
+database/
+├── migrations/               # Structure de la base de données
+├── seeders/                  # Données de démonstration
+resources/js/
+├── Pages/                    # Composants React (Dashboard, Reports, Admin...)
+├── Components/               # Layout, Navigation
+routes/
+└── web.php                   # Routes protégées par middleware
+```
+
+---
+
+## 👤 Auteur
+
+**Farah Ghirissi**  
+Institut Spécialisé en Nouvelles Technologies de l'Information et de la Communication — SAFI  
+OFPPT | Année 2025–2026
+
+---
+
+*Développé dans le cadre d'un projet de fin de formation.*
