@@ -4,213 +4,80 @@
 
 ---
 
-## 🎨 Design Premium — Thème "Earthy"
+## 📽️ Démonstration Vidéo
+Découvrez l'application en action : une interface fluide pour gérer vos finances, vos budgets et superviser les utilisateurs en tant qu'administrateur.
 
-L'interface intègre un design **Premium Earthy** avec une palette de couleurs harmonieuse (vert sauge, brun terre, sable) et des micro-animations pour une expérience utilisateur moderne et élégante.
-
----
-
-## 🔐 Authentification & Accès par Rôle
-
-L'accès à la plateforme est **universel et intelligent** — aucune inscription manuelle requise.
-
-| Rôle | Accès |
-|------|-------|
-| **Admin** | Se connecter avec le nom `farah gh` → Accès complet à la plateforme |
-| **Utilisateur** | N'importe quel nom → Espace personnel (dépenses, revenus, budgets) |
-
-> Le système crée automatiquement le compte si l'email n'existe pas encore.
+![Démo du Projet](public/assets/videos/demo.webp)
 
 ---
 
-## 📊 Espace Utilisateur
+## 🎨 Aperçu de l'Interface (Design Premium)
+L'interface intègre un design **Universal Earthy** avec un confort visuel optimal et des micro-animations interactives.
 
-### Tableau de Bord — Vue Financière Globale
-Vue d'ensemble en temps réel : **Revenu Total**, **Dépenses Totales** et **Solde Net** avec graphiques interactifs (Recharts).  
-- Graphique circulaire des **dépenses par catégorie**
-- Graphique de **tendance mensuelle** des revenus et dépenses
-- Liste des **transactions récentes**
+| 🏠 Tableau de Bord (Dashboard) | 💰 Gestion des Revenus |
+|:---:|:---:|
+| ![Dashboard](public/assets/screenshots/dashboard.png) | ![Incomes](public/assets/screenshots/incomes.png) |
 
-### Module Dépenses
-Ajout de dépenses avec montant, description, date et catégorie. Le système vérifie automatiquement si le budget est dépassé et envoie une **notification d'alerte** en temps réel.
-
-### Module Revenus
-Enregistrement de toutes les sources de revenus (salaire, bonus, freelance...) avec consultation de l'historique complet.
-
-### Module Catégories
-Création de catégories personnalisées avec **code couleur** pour organiser vos finances selon vos habitudes.
-
-### Module Budgets
-Définition d'un budget mensuel par catégorie avec **barre de progression visuelle**. Une alerte est déclenchée automatiquement dès que le budget est dépassé.
-
-| Vue Budgets | Alerte Dépassement |
-|-------------|-------------------|
-| Barre de progression par catégorie | Notification automatique en temps réel |
-
-### Module Historique & Exports
-Consultation de l'ensemble des transactions avec possibilité d'export :
-
-| Format | Description |
-|--------|-------------|
-| 📥 **CSV (Excel)** | Export complet pour traitement externe |
-| 🖨️ **PDF** | Rapport imprimable stylisé directement depuis le navigateur |
-
-### Module Rapports & Financial Coach
-Analyse financière avancée mois par mois :
-- Comparaison **dépenses actuelles vs mois précédent**
-- Calcul du **taux d'épargne**
-- **Financial Coach** : conseils personnalisés générés automatiquement selon les habitudes de dépense
-
-### Module Notifications
-- Alertes automatiques de **dépassement de budget**
-- Badge dynamique indiquant les **notifications non lues**
-- Marquage en masse comme "lues"
-
-### Module Paramètres
-- Modification du **nom et email** du profil
-- **Changement de mot de passe** sécurisé avec vérification de l'ancien mot de passe
+| 💸 Gestion des Dépenses | 📑 Rapports & Statistiques |
+|:---:|:---:|
+| ![Expenses](public/assets/screenshots/expenses.png) | ![Reports](public/assets/screenshots/reports.png) |
 
 ---
 
-## 🛡️ Espace Administrateur (Admin uniquement)
+## 🔑 Identifiants de Test (Mode Démo)
 
-L'administrateur dispose d'un **panneau sécurisé à double authentification** (session + code PIN).
-
-### Accès Sécurisé par PIN
-Même un administrateur connecté doit saisir le **code PIN secret** pour accéder au panneau de contrôle — ajoutant une couche de sécurité supplémentaire.
-
-### Statistiques Globales de la Plateforme
-Vue d'ensemble en temps réel :
-- Nombre total d'**utilisateurs actifs**
-- Volume global des **dépenses** de la plateforme
-- Volume global des **revenus** de la plateforme
-
-### Gestion des Comptes Utilisateurs
-- Consultation de tous les comptes inscrits
-- **Modification des rôles** (User ↔ Admin) en un clic
-- **Suppression** de comptes (avec protection contre l'auto-suppression)
+| Rôle | Nom / Identifiant | Email | Code PIN Admin |
+|------|-------------------|-------|---------------|
+| **Administrateur** | `farah ghilan` | *n'importe lequel* | `1234` |
+| **Utilisateur** | *n'importe quel nom* | *n'importe lequel* | — |
 
 ---
 
-## 🔑 Identifiants de Démonstration
+## 🛡️ Fonctionnalités Clés
+L'application regroupe l'ensemble des outils nécessaires à une gestion financière rigoureuse, répartis selon les rôles.
 
-| Rôle | Nom à saisir | Email | Code PIN Admin |
-|------|-------------|-------|---------------|
-| **Administrateur** | `farah ghilan` | n'importe lequel | `1234` |
-| **Utilisateur** | n'importe lequel | n'importe lequel | — |
+### 🏠 Espace Utilisateur (Gestion Personnelle)
+- **Tableau de Bord Dynamique** : Vue d'ensemble en temps réel (Solde net, revenus totaux, dépenses totales) avec graphiques circulaires et temporels.
+- **Gestion des Flux** : Ajout simplifié de revenus et dépenses avec catégorisation automatique.
+- **Système de Budgétisation** : Définition de plafonds par catégorie avec **barres de progression visuelles** et alertes intelligentes.
+- **Notifications en Temps Réel** : Alertes automatiques dès qu'un budget est dépassé ou qu'une limite de dépense est atteinte.
+- **Rapports Avancés** : Analyse comparative entre le mois actuel et le précédent, incluant un **Financial Coach** (conseils personnalisés).
 
----
-
-## ⚙️ Fonctionnalités Clés
-
-### 💰 Gestion Financière
-- Suivi complet revenus & dépenses avec catégorisation
-- Budgets mensuels avec alertes automatiques
-- Historique filtrable avec export multi-format
-
-### 📈 Analyse & Intelligence
-- Rapports mensuels comparatifs (mois actuel vs précédent)
-- Financial Coach avec conseils personnalisés
-- Graphiques interactifs et tableaux de bord dynamiques
-
-### 🛡️ Sécurité & Administration
-- Authentification universelle avec attribution automatique des rôles
-- RBAC (Role-Based Access Control) via Middlewares Laravel
-- Double authentification pour le panneau Admin (Session + PIN)
-- Protection CSRF sur tous les formulaires
-- Mots de passe hachés (Bcrypt)
-
-### 📤 Mobilité des Données
-- Export CSV compatible Excel
-- Impression PDF stylisée directement depuis le navigateur
+### 🛡️ Espace Administrateur (Supervision)
+- **Sécurité Multi-Couches** : Accès au panneau d'administration protégé par un **Code PIN secret** additionnel.
+- **Statistiques Globales** : Vue d'ensemble sur l'activité de la plateforme (Nombre d'utilisateurs, volume global des transactions).
+- **Gestion des Comptes** : Contrôle total sur les utilisateurs inscrits (Attribution des rôles Admin/User, suppression sécurisée).
 
 ---
 
-## 🛠️ Stack Technologique
-
-| Composant | Technologie |
-|-----------|-------------|
-| **Backend** | Laravel 12 / PHP 8.2 |
-| **Frontend** | React 19 + Inertia.js |
-| **Base de données** | MySQL |
-| **UI Composants** | Ant Design 6 |
-| **Graphiques** | Recharts |
-| **Styling** | TailwindCSS 4 + CSS personnalisé |
-| **Build Tool** | Vite 7 |
-| **Versioning** | Git / GitHub |
-
----
-
-## 🏗️ Architecture
-
-- **MVC** (Model-View-Controller) côté Backend Laravel
-- **SPA** (Single Page Application) côté Frontend React/Inertia
-- **RBAC** pour la gestion des permissions et des rôles
+## ⚙️ Détails Techniques & Sécurité
+- **Multi-Guards** : Barrières d'authentification Laravel (Middlewares) séparant strictement les sessions.
+- **Protection des Données** : Mots de passe hachés (Bcrypt) et protection native contre les failles CSRF.
+- **Mobilité des Données** : Exports disponibles en formats **CSV (Excel)** et **PDF stylisé** directement via le navigateur.
+- **Stack Moderne** : Utilisation de **TailwindCSS 4**, **Ant Design 6** et **Recharts** pour une UI/UX d'exception.
 
 ---
 
 ## 🚀 Installation
 
-### Prérequis
-- PHP 8.2+
-- Composer
-- Node.js 18+
-- MySQL
-
-### Étapes
-
+### 🏗️ Étapes Rapidement
 ```bash
 # 1. Cloner le dépôt
 git clone https://github.com/farahgh12/SmartExpenseManager.git
-cd SmartExpenseManager
 
-# 2. Installer les dépendances PHP
+# 2. Installer les dépendances
 composer install
-
-# 3. Installer les dépendances JavaScript
 npm install
 
-# 4. Configuration de l'environnement
+# 3. Configuration & Base de données
 cp .env.example .env
-# Modifier .env : DB_DATABASE, DB_USERNAME, DB_PASSWORD
-
-# 5. Générer la clé d'application
 php artisan key:generate
-
-# 6. Créer les tables
-php artisan migrate
-
-# 7. Peupler avec des données de démonstration
-php artisan db:seed --class=DemoDataSeeder
+php artisan migrate:fresh --seed
 php artisan seed:notifications
 
-# 8. Lancer l'application (2 terminaux)
+# 4. Lancer les serveurs
 php artisan serve
 npm run dev
-```
-
-### Accès
-- Application : `http://localhost:8000`
-- Se connecter avec le nom **`farah gh`** + n'importe quel email pour accéder en tant qu'Admin
-
----
-
-## 📁 Structure du Projet
-
-```
-app/
-├── Http/Controllers/        # Logique métier (Expenses, Incomes, Reports, Admin...)
-├── Http/Middleware/          # AdminMiddleware (RBAC)
-├── Models/                   # User, Expense, Income, Category, Budget
-├── Notifications/            # BudgetExceeded (alertes automatiques)
-database/
-├── migrations/               # Structure de la base de données
-├── seeders/                  # Données de démonstration
-resources/js/
-├── Pages/                    # Composants React (Dashboard, Reports, Admin...)
-├── Components/               # Layout, Navigation
-routes/
-└── web.php                   # Routes protégées par middleware
 ```
 
 ---
@@ -222,5 +89,4 @@ Institut Spécialisé en Nouvelles Technologies de l'Information et de la Commun
 OFPPT | Année 2025–2026
 
 ---
-
 *Développé dans le cadre d'un projet de fin de formation.*
