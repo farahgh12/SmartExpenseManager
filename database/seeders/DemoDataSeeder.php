@@ -17,7 +17,7 @@ class DemoDataSeeder extends Seeder
         $categories = Category::all();
         if ($categories->isEmpty()) return;
 
-        // Seed dummy users
+        // Initialisation des comptes utilisateurs (Mode Démo)
         $names = ['Ahmed Benani', 'Sara Mansouri', 'Khalid Alami', 'Yasmine Drissi', 'Omar Tazi'];
         foreach ($names as $name) {
             $email = strtolower(str_replace(' ', '.', $name)) . '@demo.com';
@@ -27,9 +27,9 @@ class DemoDataSeeder extends Seeder
             );
         }
 
-        // Seed financial data for ALL users
+        // Génération de l'historique financier pour chaque utilisateur
         foreach (User::all() as $user) {
-            // Current month expenses
+            // Transactions du mois en cours
             for ($i = 0; $i < 12; $i++) {
                 Expense::create([
                     'user_id' => $user->id,
@@ -40,7 +40,7 @@ class DemoDataSeeder extends Seeder
                 ]);
             }
 
-            // Last month expenses
+            // Transactions du mois précédent
             for ($i = 0; $i < 8; $i++) {
                 Expense::create([
                     'user_id' => $user->id,
@@ -51,7 +51,7 @@ class DemoDataSeeder extends Seeder
                 ]);
             }
 
-            // Current month income
+            // Revenus du mois actuel
             Income::create([
                 'user_id' => $user->id,
                 'amount' => rand(4000, 7000),
@@ -59,7 +59,7 @@ class DemoDataSeeder extends Seeder
                 'date' => \Carbon\Carbon::now()->subDays(rand(1, 5)),
             ]);
 
-            // Last month income
+            // Revenus du mois précédent
             Income::create([
                 'user_id' => $user->id,
                 'amount' => rand(3500, 6000),

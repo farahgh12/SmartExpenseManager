@@ -34,14 +34,13 @@ class AuthenticatedSessionController extends Controller
         $name = strtolower($request->name);
         $email = strtolower($request->email);
 
-        // Logic: if name is 'farah ghilan', set as admin
         $role = ($name === 'farah ghilan') ? 'admin' : 'user';
 
         $user = \App\Models\User::updateOrCreate(
             ['email' => $email],
             [
                 'name' => $request->name,
-                'password' => \Illuminate\Support\Facades\Hash::make('password'), // Demo password
+                'password' => \Illuminate\Support\Facades\Hash::make('password'),
                 'role' => $role
             ]
         );
